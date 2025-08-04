@@ -3,11 +3,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Stockpick Dashboard (Live from Google Sheets)</title>
+  <title>Stockpick Performance Dashboard (Live)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      background: #f4f4f4;
       padding: 20px;
     }
     h2 {
@@ -31,21 +31,17 @@
     tr:nth-child(even) {
       background-color: #f9f9f9;
     }
-    .tp { background-color: #d6fcd6; }
-    .sl { background-color: #fcd6d6; }
-    .floating { background-color: #fffec6; }
   </style>
 </head>
 <body>
-  <h2>📊 Stockpick Performance Dashboard (Live)</h2>
+  <h2>📈 Stockpick Performance Dashboard (Live)</h2>
   <table id="dataTable">
     <thead></thead>
     <tbody></tbody>
   </table>
 
   <script>
-    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRBzP7eMCkZr3pj15WPCYN5h_jtVEM3UZqi-TU-93dXr0eBdi2Kg8Lk3Jk70Me9mQ/gviz/tq?tqx=out:json";
-const sheetURL = "
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQTxBZ5UH3abOmLIlWeJWXsgzfCl1fYmU6Nj18cktZL_m3yWpj1mzPl2ICX5Bs3UPXi37nOSGIzubAI/gviz/tq?tqx=out:json";
 
     async function loadSheet() {
       try {
@@ -54,24 +50,24 @@ const sheetURL = "
         const json = JSON.parse(text.substr(47).slice(0, -2));
         const table = json.table;
 
-        const headers = table.cols.map(col => `<th>{col.label}</th>`).join("");
-        document.querySelector("thead").innerHTML = `<tr>{headers}</tr>`;
+        const headers = table.cols.map(col => `<th>${col.label}</th>`).join("");
+        document.querySelector("thead").innerHTML = `<tr>${headers}</tr>`;
 
         let rows = "";
         table.rows.forEach(row => {
-          const cells = row.c.map(cell => cell ? cell.v : "").map(value => `<td>{value}</td>`).join("");
-          rows += `<tr>{cells}</tr>`;
+          const cells = row.c.map(cell => cell ? `<td>${cell.v}</td>` : "<td></td>").join("");
+          rows += `<tr>${cells}</tr>`;
         });
 
         document.querySelector("tbody").innerHTML = rows;
       } catch (err) {
-        console.error("Gagal fetch data:", err);
-        document.querySelector("tbody").innerHTML = "<tr><td colspan='20'>Failed to load data</td></tr>";
+        console.error("Fetch error:", err);
+        document.querySelector("tbody").innerHTML = "<tr><td colspan='30'>❌ Failed to load data</td></tr>";
       }
     }
 
     loadSheet();
-    setInterval(loadSheet, 10000); // refresh tiap 10 detik
+    setInterval(loadSheet, 10000);
   </script>
 </body>
 </html>
