@@ -2,160 +2,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Stockpick Performance Review</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background: #f8f9fa;
-        }
-        h2 {
-            text-align: center;
-        }
-        table.stock-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .stock-table th, .stock-table td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-            font-size: 14px;
-        }
-        .stock-table th {
-            background-color: #eaeaea;
-        }
-        .stock-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .stock-table td {
-            color: #333;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Stockpick Dashboard (Live from Google Sheets)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+      text-align: center;
+    }
+    th {
+      background-color: #333;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .tp { background-color: #d6fcd6; }
+    .sl { background-color: #fcd6d6; }
+    .floating { background-color: #fffec6; }
+  </style>
 </head>
 <body>
-    <h2>📊 Stockpick Performance Review - August 2025</h2>
-    <table class="dataframe stock-table">
-  <thead>
-    <tr style="text-align: center;">
-      <th>No</th>
-      <th>Date</th>
-      <th>Stockpick</th>
-      <th>Remarks</th>
-      <th>Allocation</th>
-      <th>Initial Price</th>
-      <th>Last Price (Auto)</th>
-      <th>TP1</th>
-      <th>TP2</th>
-      <th>Stoploss</th>
-      <th>Chg (%)</th>
-      <th>% TP1</th>
-      <th>% TP2</th>
-      <th>% SL</th>
-      <th>Result</th>
-      <th>Portf. Return</th>
-      <th>Timestamp</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>1</td>
-      <td>IDX:AADI</td>
-      <td>BOB 655</td>
-      <td>15%</td>
-      <td>655</td>
-      <td>6775</td>
-      <td>720</td>
-      <td>780</td>
-      <td>610</td>
-      <td>9.343511</td>
-      <td>0.099237</td>
-      <td>0.190840</td>
-      <td>-0.068702</td>
-      <td>Done TP2</td>
-      <td>1.401527</td>
-      <td>2025-08-04 15:53:59</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>1</td>
-      <td>IDX:AALI</td>
-      <td>BOW 2180</td>
-      <td>15%</td>
-      <td>2180</td>
-      <td>6750</td>
-      <td>2340</td>
-      <td>2430</td>
-      <td>2060</td>
-      <td>2.096330</td>
-      <td>0.073394</td>
-      <td>0.114679</td>
-      <td>-0.055046</td>
-      <td>Done TP2</td>
-      <td>0.314450</td>
-      <td>2025-08-04 15:53:59</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>1</td>
-      <td>IDX:ABMM</td>
-      <td>BUY 396</td>
-      <td>15%</td>
-      <td>396</td>
-      <td>3030</td>
-      <td>420</td>
-      <td>432</td>
-      <td>378</td>
-      <td>6.651515</td>
-      <td>0.060606</td>
-      <td>0.090909</td>
-      <td>-0.045455</td>
-      <td>Done TP2</td>
-      <td>0.997727</td>
-      <td>2025-08-04 15:53:59</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>1</td>
-      <td>IDX:ACES</td>
-      <td>BOB 370</td>
-      <td>15%</td>
-      <td>372</td>
-      <td>476</td>
-      <td>390</td>
-      <td>410</td>
-      <td>352</td>
-      <td>0.279570</td>
-      <td>0.048387</td>
-      <td>0.102151</td>
-      <td>-0.053763</td>
-      <td>Done TP2</td>
-      <td>0.041935</td>
-      <td>2025-08-04 15:53:59</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>1</td>
-      <td>IDX:ACRO</td>
-      <td>BUY</td>
-      <td>15%</td>
-      <td>228</td>
-      <td>69</td>
-      <td>242</td>
-      <td>258</td>
-      <td>212</td>
-      <td>-0.697368</td>
-      <td>0.061404</td>
-      <td>0.131579</td>
-      <td>-0.070175</td>
-      <td>Cutloss</td>
-      <td>-0.104605</td>
-      <td>2025-08-04 15:53:59</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>📊 Stockpick Performance Dashboard (Live)</h2>
+  <table id="dataTable">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRBzP7eMCkZr3pj15WPCYN5h_jtVEM3UZqi-TU-93dXr0eBdi2Kg8Lk3Jk70Me9mQ/gviz/tq?tqx=out:json";
+
+    async function loadSheet() {
+      try {
+        const res = await fetch(sheetURL);
+        const text = await res.text();
+        const json = JSON.parse(text.substr(47).slice(0, -2));
+        const table = json.table;
+
+        const headers = table.cols.map(col => `<th>{col.label}</th>`).join("");
+        document.querySelector("thead").innerHTML = `<tr>{headers}</tr>`;
+
+        let rows = "";
+        table.rows.forEach(row => {
+          const cells = row.c.map(cell => cell ? cell.v : "").map(value => `<td>{value}</td>`).join("");
+          rows += `<tr>{cells}</tr>`;
+        });
+
+        document.querySelector("tbody").innerHTML = rows;
+      } catch (err) {
+        console.error("Gagal fetch data:", err);
+        document.querySelector("tbody").innerHTML = "<tr><td colspan='20'>Failed to load data</td></tr>";
+      }
+    }
+
+    loadSheet();
+    setInterval(loadSheet, 10000); // refresh tiap 10 detik
+  </script>
 </body>
 </html>
